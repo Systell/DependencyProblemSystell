@@ -1,0 +1,32 @@
+{The Dependency Problem}{Village}
+It feels like your village has been in a state of constant bickering and dispute for an eternity. Only Gary the Oblivious seems unaffected from the turmoil. As voices prattle on, your mind drifts to memories of falling asleep as a child. You remember how the soothiness of the waves crashing on the beach competed with the terror of the distant inhuman growls of the Island Monsters. Your memory makes a violent shift to a few months ago when a monster crossed the channel. Its eyes were pits of cold hatred. Mercy did not swerve the path of its destruction. Since then, the village has hotly debated paying for a bridge to be built to the island for the royal army to cross and kill off the monsters. Do we risk our lives to the monsters, or indebt them to the Corrupt King?
+
+The village finally decides to take a vote on whether to build the bridge. Of the 99 villagers, 49 raise their hand to build the bridge. Then Gary the Oblivious slowly raises his hand, confusion spread across his face. The decision passes. You feel relief as the dispute is finally over. A messenger takes some gold and heads off to the wizard guild. Awhile later, some officers of the royal army arrive to witness the village's choice. They ask who was against bringing in the army. People stick with their view, and so 49 hands shoot into the air. And then it happens: Gary raises his hand. Before anyone can react, the officers decide the vote has failed and vanish. Just then the wizard guild congregates to cast the construction spell.
+
+The monsters cross the magic bridge and everyone is slaughtered. Except Gary. Dammit, Gary!
+
+This vote is illustrated in the simulation below. As the next page will explain, Gary has exposed a fundamental flaw of the voting system: an inability to deal with dependencies.
+
+{The Core of the Issue}{Preference}
+The core of this problem is that the outcome of one decision effects how preferable the outcome of another decision is. The voting method contained no way for the voter to express that fact. In the vote the effects of the decision were so heavily dependent on each other's results that disregarding that fact made it all feel absurd and completely out of touch with what the voters wanted.
+
+Now, with our omniscient view there is a way for us to calculate the preferability of all the options, as seen below, but how can we find that with a voting system?
+
+{Solutions}{CombinedVote}
+Solving this problem is not simple. For example, you might be tempted to have voters pick which of the combined options they most prefer. For example, you might tell voters "Pick one of these four options: kill Gary and eat a bird, kill Gary and don't eat a bird, don't kill Gary and don't eat a bird, or don't kill Gary and eat a bird." The only reason anyone would not kill Gary is if they had some crazy obsession with not killing, so all the" don't kill Gary" types are united in not eating a bird either. However, the kill Gary faction is divided between bird eater and non bird eater. You can see the result in the simulation below. The problem here is that this new voting system only allows people to express one option as totally preferable and all others are treated as completely unacceptable. The voting system now has an independence problem.
+
+And yes, there are more complicated voting systems that can find the best combination in this scenario. However, even these systems run in to the issue that, for every decision you add to a ballot, the amount of possible combinations doubles. With just 10 questions on a ballot, there are 1024 combinations of responses. Resolving this issue is hard enough that cheating is starting to feel fairly enticing. But what is there to exploit?
+
+{The Problem in Legislatures}{Legislature}
+The parliament of Dessertia is in turmoil. Though the Strawberry faction holds the most seats they don't have the majority. The Chocolate and Mint factions refuse to form a coalition with each other. It is a time of crisis and nothing is getting done when action is most needed. The once loyal citizens are about ready to desert the land!
+
+How did this come about? In the Dessertian parliament, citizens vote for their local representative and the winner gets a seat in the parliament. These local elections have no dependency on the results of any other localities. Many, in exchange for a functioning government. With only nine seats there are almost twenty thousand ways to distribute the seats among just the three major parties.
+
+In desperation, they stumble across a potential solution. A reverse parliament! People will vote directly for the role of prime minister, and each candidate for the job will have their own list of ministers to represent each locality. You can try your hand at being a candidate below: pick the results that give the most preferable outcome to get as many votes as you can. >IF MESSING WITH PREFERABILITY IS POSSIBLE INSERT HERE<
+
+Now maybe that specific idea has significant problems for other reasons, or maybe not. The point is that if there is some means of restricting the ballot options to the most preferable choices, voters can express .
+
+Of course, real life is always a complicated beast, and many things to consider. I invite you to explore and discuss this topic. Thank you for joining along.
+
+
+
