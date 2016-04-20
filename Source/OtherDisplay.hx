@@ -23,7 +23,11 @@ class OtherDisplay
 	public function createHeadBar()
 	{
 		headBar.graphics.beginFill(0x2D4052);
-		headBar.graphics.drawRect(0,0,s.stageWidth,70*Main.calibrationFactor);
+		headBar.graphics.drawRect(0,0,s.stageWidth,OtherDisplay.getHeadBarHeight());
+	}
+	public static function getHeadBarHeight():Float	
+	{
+		return 70*Main.calibrationFactor;
 	}
 	public function resize()
 	{

@@ -26,6 +26,7 @@ class Main extends Sprite
 	public var textFileContents:String;
 	
 	public static var simulationFont:Font;
+	public static var textSizeRatio:Float = -1;
 	
 	public function new ()
 	{

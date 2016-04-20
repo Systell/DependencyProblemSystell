@@ -45,12 +45,26 @@ class LegislatureDisplay
 	public static var totSpriteHeight:Float;
 	
 	public var partyChangeSize:Float;
+	
+	public var origSmallestText:Int = 12;
+	public var origSmallText:Int = 14;
+	public var origLargeText:Int = 16;
+	public var smallestText:Int = 12;
+	public var smallText:Int = 14;
+	public var largeText:Int = 16;
 	public function new()
 	{
 		
 	}
 	public function setup(s:Stage)
 	{
+		if(Main.textSizeRatio > 0)
+		{
+			smallestText=Math.round(origSmallestText*Main.textSizeRatio);
+			smallText=Math.round(origSmallText*Main.textSizeRatio);
+			largeText=Math.round(origLargeText*Main.textSizeRatio);
+		}
+		
 		LegislatureDisplay.mainDisplayWidth =  Math.round(Math.min(Main.calibrationFactor*800, (s.stageWidth)*.65));
 		LegislatureDisplay.mainDisplayHeight = Math.round(LegislatureDisplay.mainDisplayWidth*.5);
 		LegislatureDisplay.preferenceAdjustWidth = Math.round(LegislatureDisplay.mainDisplayWidth*.25);
@@ -60,7 +74,7 @@ class LegislatureDisplay
 		mainColumnTextSprite = new Sprite();
 		mainColumnSprite.x = .5*(s.stageWidth-LegislatureDisplay.mainDisplayWidth*.75);
 		
-		var testTextFormat = new TextFormat(Main.simulationFont.fontName, 14, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var testTextFormat = new TextFormat(Main.simulationFont.fontName, smallText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		var testField = new TextField();
 		testField.text = "TEST";
 		
@@ -84,7 +98,7 @@ class LegislatureDisplay
 	public function columnTextSetup()
 	{
 		var columnField:Array<TextField> = [];
-		var columnTextFormat = new TextFormat(Main.simulationFont.fontName, 14, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var columnTextFormat = new TextFormat(Main.simulationFont.fontName, smallText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		for(i in 0...4)
 		{
 			columnField.push(new TextField());
@@ -173,7 +187,7 @@ class LegislatureDisplay
 		dir = 1;
 		
 		var preferenceAdjustField:Array<TextField> = [];
-		var preferenceAdjustTextFormat = new TextFormat(Main.simulationFont.fontName, 12, null, null, null, null, null, null, TextFormatAlign.LEFT);
+		var preferenceAdjustTextFormat = new TextFormat(Main.simulationFont.fontName, smallestText, null, null, null, null, null, null, TextFormatAlign.LEFT);
 		for(i in 0...4)
 		{
 			preferenceAdjustField.push(new TextField());
@@ -546,7 +560,7 @@ class LegislatureDisplay
 		preferenceOutcomeSprite.graphics.beginFill(0x555577);
 		preferenceOutcomeSprite.graphics.drawRect(.66*graphWidth-.5*barWidth,(1-ratioY)*graphHeight,barWidth,ratioY*graphHeight);
 		
-		var labelTextFormat = new TextFormat(Main.simulationFont.fontName, 12, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var labelTextFormat = new TextFormat(Main.simulationFont.fontName, smallestText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		var voteLabelField = new TextField();
 		voteLabelField.defaultTextFormat = labelTextFormat;
 		voteLabelField.autoSize = TextFieldAutoSize.NONE;

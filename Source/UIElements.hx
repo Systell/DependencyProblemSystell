@@ -5,6 +5,7 @@ import openfl.Assets;
 import openfl.Lib;
 import openfl.events.*;
 import openfl.geom.Rectangle;
+import openfl.text.*;
 
 class UIElements
 {
@@ -156,12 +157,14 @@ class UIElements
 		excessScrollNext = 0;
 		excessScrollPrev = 0;
 		Main.textDisplay.goNextPage();
+		resize();
 	}
 	public function goPrevPage(?e:Event)
 	{
 		excessScrollNext = 0;
 		excessScrollPrev = 0;
 		Main.textDisplay.goPrevPage();
+		resize();
 	}
 	public function pageIcons(next:Bool):Array<Sprite>
 	{
@@ -173,13 +176,19 @@ class UIElements
 		excessSprite.graphics.beginFill(0x000000);
 		excessSprite.graphics.drawCircle(centerX,centerY,radius);
 		var pageSprites:Array<Sprite> = [];
-		var colours:Array<Int> = [0x000000, 0xFF0000, 0x0000FF];
+		var colours:Array<Int> = [0x000000, 0x587DA0, 0x2D4052];
 		for(i in 0...3)
 		{
 			pageSprites.push(new Sprite());
 			pageSprites[i].graphics.beginFill(0x000000, 0);
 			pageSprites[i].graphics.lineStyle(1, colours[i], 1, true);
 			pageSprites[i].graphics.drawCircle(centerX,centerY,radius);
+			//5apps fails unless I include this pointless textfield;
+			var tmpSpr = pageSprites[i];
+			var tf:TextField = new TextField();
+			tf.selectable = false;
+			tf.width = tmpSpr.width;
+			tf.height = tmpSpr.height;
 			if(next)
 			{
 				pageSprites[i].graphics.moveTo(diameter*.75, .5*diameter);
@@ -203,7 +212,7 @@ class UIElements
 		//excessSprite.graphics.beginFill(0x000000);
 		//excessSprite.graphics.drawCircle(centerX,centerY,radius);
 		var pageSprites:Array<Sprite> = [];
-		var colours:Array<Int> = [0x000000, 0xFF0000, 0x0000FF];
+		var colours:Array<Int> = [0x000000, 0x587DA0, 0x2D4052];
 		for(i in 0...3)
 		{
 			pageSprites.push(new Sprite());
@@ -327,7 +336,7 @@ class UIElements
 	//Scroll:
 	public function createScrollGraphics()
 	{
-		var colours:Array<Int> = [0x000000, 0xFF0000, 0x0000FF];
+		var colours:Array<Int> = [0x000000, 0x587DA0, 0x2D4052];
 		var halfTriangleWidth:Float = 8*Main.calibrationFactor;
 		var triangleWidth:Float = 2*halfTriangleWidth;
 		for(i in 0...3)
@@ -391,8 +400,15 @@ class UIElements
 		scrollHitSprite.graphics.drawRect(0, 0, 2*scrollRectSprite.width, scrollSprite.height);
 		scrollHitSprite.x = scrollSprite.x-scrollHitSprite.width*.5;
 		scrollHitSprite.y = scrollSprite.y;
-		s.addChild(scrollHitSprite);
+		//5apps fails unless I include this pointless textfield;
+		var tmpSpr = scrollHitSprite;
+		var tf:TextField = new TextField();
+		tf.selectable = false;
+		tf.width = tmpSpr.width;
+		tf.height = tmpSpr.height;
+		tmpSpr.addChild(tf);
 		scrollHitSprite.addEventListener(MouseEvent.MOUSE_DOWN, grabRect);
+		s.addChild(scrollHitSprite);
 	}
 	public function positionScrollBar()
 	{
@@ -509,7 +525,7 @@ class UIElements
 		
 		var halfTriangleWidth:Float = 8*Main.calibrationFactor;
 		var triangleWidth:Float = 2*halfTriangleWidth;
-		var colours:Array<Int> = [0x000000, 0xFF0000, 0x0000FF];
+		var colours:Array<Int> = [0x000000, 0x587DA0, 0x2D4052];
 		for(i in 0...3)
 		{
 			textContractSprites.push(new Sprite());

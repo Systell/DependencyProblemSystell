@@ -50,7 +50,12 @@ class PreferenceGraph
 	
 	public var stg:Stage;
 	
-	
+	public var origSmallestText:Int = 12;
+	public var origSmallText:Int = 14;
+	public var origLargeText:Int = 16;
+	public var smallestText:Int = 12;
+	public var smallText:Int = 14;
+	public var largeText:Int = 16;
 	public function new(fpa:FindPreferenceAnimation)
 	{
 		this.fpa = fpa;
@@ -58,6 +63,12 @@ class PreferenceGraph
 	public function setup(s:Stage)
 	{
 		stg = s;
+		if(Main.textSizeRatio > 0)
+		{
+			smallestText=Math.round(origSmallestText*Main.textSizeRatio);
+			smallText=Math.round(origSmallText*Main.textSizeRatio);
+			largeText=Math.round(origLargeText*Main.textSizeRatio);
+		}
 		totalWidth = Math.round(Math.min(Main.calibrationFactor*1000, (s.stageWidth-Main.calibrationFactor*40)*.9));
 		graphHeight = Math.round(totalWidth*.333333);
 		graphSprite = new Sprite();
@@ -116,7 +127,7 @@ class PreferenceGraph
 	{
 		yAxisSprite = new Sprite();
 		var yAxisField:Array<TextField> = [];
-		var yAxisTextFormat = new TextFormat(Main.simulationFont.fontName, 14, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var yAxisTextFormat = new TextFormat(Main.simulationFont.fontName, smallText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		for(i in 0...2)
 		{
 			yAxisField.push(new TextField());
@@ -145,8 +156,8 @@ class PreferenceGraph
 	{
 		labelSprite = new Sprite();
 		var labelField:Array<TextField> = [];
-		var labelTextFormatSml = new TextFormat(Main.simulationFont.fontName, 12, null, null, null, null, null, null, TextFormatAlign.CENTER);
-		var labelTextFormatMed = new TextFormat(Main.simulationFont.fontName, 14, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var labelTextFormatSml = new TextFormat(Main.simulationFont.fontName, smallestText, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var labelTextFormatMed = new TextFormat(Main.simulationFont.fontName, smallText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		//var labelTextFormatBig = new TextFormat(Main.simulationFont.fontName, 16, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		for(i in 0...9)
 		{
@@ -198,7 +209,7 @@ class PreferenceGraph
 	public function createCalculateButton()
 	{
 		var calculateButtonSprites:Array<Sprite> = [];
-		var calculateButtonTextFormat = new TextFormat(Main.simulationFont.fontName, 16, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var calculateButtonTextFormat = new TextFormat(Main.simulationFont.fontName, largeText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		var colours:Array<Int> = [0x000000, 0x587DA0, 0x2D4052];
 		for(i in 0...3)
 		{
@@ -230,7 +241,7 @@ class PreferenceGraph
 	public function createResetButton()
 	{
 		var resetButtonSprites:Array<Sprite> = [];
-		var resetButtonTextFormat = new TextFormat(Main.simulationFont.fontName, 16, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var resetButtonTextFormat = new TextFormat(Main.simulationFont.fontName, largeText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		var colours:Array<Int> = [0x000000, 0x587DA0, 0x2D4052];
 		for(i in 0...3)
 		{
@@ -257,7 +268,7 @@ class PreferenceGraph
 		var rectWidth:Float = factionPrefBarWidth;
 		
 		var factionField:Array<TextField> = [];
-		var factionTextFormat = new TextFormat(Main.simulationFont.fontName, 14, null, null, null, null, null, null, TextFormatAlign.LEFT);
+		var factionTextFormat = new TextFormat(Main.simulationFont.fontName, smallText, null, null, null, null, null, null, TextFormatAlign.LEFT);
 		for(i in 0...4)
 		{
 			factionField.push(new TextField());

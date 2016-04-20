@@ -39,6 +39,11 @@ class VillageGraph
 	public var resetButton:SimpleButton;
 	
 	public var totGraphHeight:Float;
+	
+	public var origSmallText:Int = 14;
+	public var origLargeText:Int = 16;
+	public var smallText:Int = 14;
+	public var largeText:Int = 16;
 	public function new(s:Stage)
 	{
 		this.s = s;
@@ -46,10 +51,15 @@ class VillageGraph
 	}
 	public function setup(?e:Event)
 	{
+		if(Main.textSizeRatio > 0)
+		{
+			smallText=Math.round(origSmallText*Main.textSizeRatio);
+			largeText=Math.round(origLargeText*Main.textSizeRatio);
+		}
 		totalWidth = Math.round(Math.min(Main.calibrationFactor*800, (s.stageWidth-Main.calibrationFactor*40)*.9));
 		graphHeight = Math.round(totalWidth*.5);
 		graphSprite = new Sprite();
-		var testTextFormat = new TextFormat(Main.simulationFont.fontName, 14, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var testTextFormat = new TextFormat(Main.simulationFont.fontName, smallText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		var testField = new TextField();
 		testField.text = "TEST";
 		
@@ -79,7 +89,7 @@ class VillageGraph
 	public function createVoteButton()
 	{
 		var voteButtonSprites:Array<Sprite> = [];
-		var voteButtonTextFormat = new TextFormat(Main.simulationFont.fontName, 16, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var voteButtonTextFormat = new TextFormat(Main.simulationFont.fontName, largeText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		var colours:Array<Int> = [0x000000, 0x587DA0, 0x2D4052];
 		for(i in 0...3)
 		{
@@ -103,7 +113,7 @@ class VillageGraph
 	public function createResetButton()
 	{
 		var resetButtonSprites:Array<Sprite> = [];
-		var resetButtonTextFormat = new TextFormat(Main.simulationFont.fontName, 16, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var resetButtonTextFormat = new TextFormat(Main.simulationFont.fontName, largeText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		var colours:Array<Int> = [0x000000, 0x587DA0, 0x2D4052];
 		for(i in 0...3)
 		{
@@ -135,7 +145,7 @@ class VillageGraph
 	{
 		factionSprite = new Sprite();
 		var factionField:Array<TextField> = [];
-		var factionTextFormat = new TextFormat(Main.simulationFont.fontName, 14, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var factionTextFormat = new TextFormat(Main.simulationFont.fontName, smallText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		for(i in 0...3)
 		{
 			factionField.push(new TextField());
@@ -159,7 +169,7 @@ class VillageGraph
 	{
 		yAxisSprite = new Sprite();
 		var yAxisField:Array<TextField> = [];
-		var yAxisTextFormat = new TextFormat(Main.simulationFont.fontName, 14, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var yAxisTextFormat = new TextFormat(Main.simulationFont.fontName, smallText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		for(i in 0...2)
 		{
 			yAxisField.push(new TextField());
@@ -188,10 +198,10 @@ class VillageGraph
 	{
 		voteSprite = new Sprite();
 		var voteField:Array<TextField> = [];
-		var voteTextFormatLeft = new TextFormat(Main.simulationFont.fontName, 14, null, null, null, null, null, null, TextFormatAlign.LEFT);
-		var voteTextFormatRight = new TextFormat(Main.simulationFont.fontName, 14, null, null, null, null, null, null, TextFormatAlign.RIGHT);
-		var voteTextFormatCenter = new TextFormat(Main.simulationFont.fontName, 14, null, null, null, null, null, null, TextFormatAlign.CENTER);
-		var voteTextFormatBig = new TextFormat(Main.simulationFont.fontName, 16, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var voteTextFormatLeft = new TextFormat(Main.simulationFont.fontName, smallText, null, null, null, null, null, null, TextFormatAlign.LEFT);
+		var voteTextFormatRight = new TextFormat(Main.simulationFont.fontName, smallText, null, null, null, null, null, null, TextFormatAlign.RIGHT);
+		var voteTextFormatCenter = new TextFormat(Main.simulationFont.fontName, smallText, null, null, null, null, null, null, TextFormatAlign.CENTER);
+		var voteTextFormatBig = new TextFormat(Main.simulationFont.fontName, largeText, null, null, null, null, null, null, TextFormatAlign.CENTER);
 		for(i in 0...6)
 		{
 			voteField.push(new TextField());

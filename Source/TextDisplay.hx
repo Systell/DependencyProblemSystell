@@ -49,7 +49,7 @@ class TextDisplay
 		expandHelperField.defaultTextFormat = expandHelperTextFormat;
 		expandHelperField.autoSize = TextFieldAutoSize.NONE;
 		expandHelperField.textColor = 0x000000;
-		expandHelperField.text = "Click above arrow to show simulation";
+		expandHelperField.text = "Double click above arrow to show simulation";
 		expandHelperField.width = s.stageWidth;
 		expandHelperField.y = s.stageHeight-expandHelperField.textHeight*1.1;
 	}
@@ -62,7 +62,7 @@ class TextDisplay
 		titleField.autoSize = TextFieldAutoSize.NONE;
 		titleField.wordWrap = true;
 		titleField.width = s.stageWidth;
-		titleField.height = s.stageHeight;
+		titleField.height = OtherDisplay.getHeadBarHeight();
 		titleField.y = .5*(Main.otherDisplay.headBar.height-titleField.textHeight);
 		titleField.x = 0;
 		titleField.textColor = 0xEEEEEE;
@@ -74,19 +74,29 @@ class TextDisplay
 	public function setupMainText()
 	{
 		mainTextFont = Assets.getFont("fonts/OpenSans-Regular.ttf");
-		mainTextFormat = new TextFormat(mainTextFont.fontName, 18);
 		mainField = new TextField();
 		//mainField.htmlText = true;
-		mainField.setTextFormat(mainTextFormat);
-		mainField.setTextFormat(mainTextFormat,1,2);
-		mainField.wordWrap = true;
 		mainField.width = determineMainWidth();
+		mainTextFormat = new TextFormat(mainTextFont.fontName,getMainTextSize());
+		mainField.setTextFormat(mainTextFormat);
+		mainField.wordWrap = true;
 		mainField.height = s.stageHeight;//getContractHeight();
-		mainField.y = 100;
+		mainField.y = OtherDisplay.getHeadBarHeight()*1.1;
 		mainField.x = .5*(s.stageWidth-mainField.width);
 		mainField.textColor = 0x535353;
+		mainField.selectable = false;
 		s.addChild(mainField);
 		
+	}
+	public function getMainTextSize():Int
+	{
+		if(Main.calibrationFactor*mainField.width < largeLength-1)
+		{
+			Main.textSizeRatio = (18-6*(800-mainField.width)/600)/18;
+			return Math.round(18-6*(800-mainField.width)/600);
+		}
+		Main.textSizeRatio = -1;
+		return 18;
 	}
 	public function scrollText(e:MouseEvent)
 	{
@@ -122,7 +132,7 @@ class TextDisplay
 	}
 	public function resize()
 	{
-		if(hasContracted[pageNumber] == false)
+		if(pages[pageNumber].lastExpanded == 0)
 		{
 			if(mainField.textHeight > 0)
 			{
@@ -131,12 +141,23 @@ class TextDisplay
 					expandText(false);
 					m.ui.textExpanded();
 				}
+				else
+				{
+					contractText(false);
+					m.ui.textContracted();
+				}
 			}
 		}
+		//else
+		//{
+//			
+		//}
 		if(!expanded)
 		Main.simHandle.sims[pageNumber].resize();
 		mainField.width = determineMainWidth();
-		mainField.x = .5*(s.stageWidth-mainField.width);
+		mainTextFormat.size = getMainTextSize();
+		mainField.setTextFormat(mainTextFormat);
+		mainField.x = .5*(s.stageWidth-(mainField.width+UIElements.getScrollAndSpaceWidth()));
 		if(expanded)
 		mainField.height = getExpandHeight();
 		else
